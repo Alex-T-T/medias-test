@@ -1,0 +1,22 @@
+# Build Stage
+FROM node AS build
+
+WORKDIR /app
+
+COPY package*.json .
+
+RUN npm ci
+
+COPY . .
+
+EXPOSE 8008
+
+ENV POSTGRES_HOST=db
+ENV POSTGRES_PORT=5432 
+ENV POSTGRES_USER=medias_test
+ENV POSTGRES_PASSWORD=medias_test
+ENV POSTGRES_DB=medias_test
+ENV SERVER_PORT=8008
+
+
+CMD ["npm", "run", "start-dev"]
