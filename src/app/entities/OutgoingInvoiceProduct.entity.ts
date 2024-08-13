@@ -7,7 +7,6 @@ const OutgoingInvoiceProduct = sequelize.define(
     {
       document_id: {
         type: DataTypes.INTEGER,
-        autoIncrementIdentity: true, 
         references: {
           model: 'OutgoingInvoices',
           key: 'id',
@@ -15,7 +14,7 @@ const OutgoingInvoiceProduct = sequelize.define(
         allowNull: false,
       },
       product_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         references: {
           model: 'Products', 
           key: 'id',

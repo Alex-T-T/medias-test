@@ -1,15 +1,15 @@
 
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../db/db.config";
+import IncomingInvoiceProduct from "./IncomingInvoiceProduct.entity";
 
 const IncomingInvoice = sequelize.define(
     'IncomingInvoice',
     {
       id: {
         type: DataTypes.INTEGER,
-        autoIncrementIdentity: true, 
+        autoIncrement: true,
         primaryKey: true,
-        allowNull: false,
       },
       date: {
         type: DataTypes.DATE,
@@ -21,6 +21,6 @@ const IncomingInvoice = sequelize.define(
     },
   );
 
-
+  IncomingInvoice.hasMany(IncomingInvoiceProduct, { foreignKey: 'document_id', as: 'products' });
   
   export default IncomingInvoice

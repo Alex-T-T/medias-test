@@ -3,8 +3,7 @@ import { sequelize } from "../../db/db.config";
 
 const CostPrice = sequelize.define('CostPrice', {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrementIdentity:true, 
+      type: DataTypes.STRING,
       references: {
         model: 'Products',
         key: 'id',
@@ -21,3 +20,4 @@ const CostPrice = sequelize.define('CostPrice', {
     },
   });
   
+  export default CostPrice
