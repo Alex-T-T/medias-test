@@ -1,6 +1,7 @@
 
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../db/db.config";
+import IncomingInvoice from "./IncomingInvoice.entity";
 
 const IncomingInvoiceProduct = sequelize.define(
     'IncomingInvoiceProduct',
@@ -27,6 +28,10 @@ const IncomingInvoiceProduct = sequelize.define(
       },
       quantity: {
         type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+      date: {
+        type: DataTypes.DATE,
         allowNull: false,
       },
     },

@@ -29,6 +29,10 @@ const OutgoingInvoiceProduct = sequelize.define(
         type: DataTypes.FLOAT,
         allowNull: false,
       },
+      date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
     },
     {
       tableName: 'OutgoingInvoiceProducts',

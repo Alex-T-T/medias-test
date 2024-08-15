@@ -41,6 +41,7 @@ export const createNewInvoice = async (createDTO: outgoingInvoiceCreate) => {
                 product_id: product.product_id,
                 price: product.price,
                 quantity: product.quantity,
+                date: createDTO.date,
             }, { transaction });
         });
 

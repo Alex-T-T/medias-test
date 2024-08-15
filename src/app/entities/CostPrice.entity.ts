@@ -13,11 +13,22 @@ const CostPrice = sequelize.define('CostPrice', {
     date: {
       type: DataTypes.DATE,
       allowNull: false,
+      primaryKey: true,
+
     },
     value: {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
-  });
+  },
+  {
+    indexes: [
+        {
+            unique: true, 
+            fields: ['id', 'date'], 
+        },
+    ],
+}
+);
   
   export default CostPrice

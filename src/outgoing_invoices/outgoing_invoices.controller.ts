@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import OutgoingInvoice from "../app/entities/OutgoingInvoice.entity";
 import * as outgoingInvoiceService from './outgoing_invoices.service'
 import { HttpStatuses } from "../app/enums/http-statuses.enum";
-import { recalculateCostPrices } from "../cost_price/cost_price.service";
+import { calculateCostPrices } from "../cost_price/cost_price.service";
 
 export const getAllInvoices = async (req: Request, res: Response) => {
    
@@ -17,7 +17,7 @@ export const createNewInvoice = async (req: Request, res: Response) => {
 
     res.status(HttpStatuses.CREATED).json(newInvoice)
 
-    await recalculateCostPrices(newInvoice)
+    await calculateCostPrices(newInvoice)
 }
 
 
