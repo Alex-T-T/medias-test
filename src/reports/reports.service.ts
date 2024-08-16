@@ -1,8 +1,6 @@
-
-import { sequelize } from "../db/db.config";
+import { sequelize } from '../db/db.config';
 
 const { QueryTypes } = require('sequelize');
-
 
 interface ReportRow {
     date: string | null;
@@ -12,8 +10,10 @@ interface ReportRow {
     profitability: number;
 }
 
-export const generateDailyProfitReport = async (startDate: Date, endDate: Date) => {
- 
+export const generateDailyProfitReport = async (
+    startDate: Date,
+    endDate: Date
+) => {
     const result = await sequelize.query(
         `
         SELECT 
@@ -40,26 +40,28 @@ END) AS profitability
 
         {
             type: QueryTypes.SELECT,
-            replacements: { startDate, endDate }
+            replacements: { startDate, endDate },
         }
     );
-
 
     const report: ReportRow[] = result.map((row: any) => ({
         date: row.date,
         summ: Number(row.summ),
         cost: Number(row.cost),
         profit: Number(row.profit),
-        profitability: Number(row.profitability)
+        profitability: Number(row.profitability),
     }));
-    
+
     report.push({
         date: null,
         summ: report.reduce((acc, row) => acc + row.summ, 0),
         cost: report.reduce((acc, row) => acc + row.cost, 0),
         profit: report.reduce((acc, row) => acc + row.profit, 0),
-        profitability: (report.reduce((acc, row) => acc + row.profit, 0) / report.reduce((acc, row) => acc + row.cost, 0)) * 100,
-    })
+        profitability:
+            (report.reduce((acc, row) => acc + row.profit, 0) /
+                report.reduce((acc, row) => acc + row.cost, 0)) *
+            100,
+    });
 
     return report;
-}
+};

@@ -1,41 +1,41 @@
-import { Op } from "sequelize"
-import Product from "../app/entities/Product.entity"
-import { HttpStatuses } from "../app/enums/http-statuses.enum"
-import HttpException from "../app/exceptions/http-exception"
-import { productCreate } from "./product.schemas"
-
+import { Op } from 'sequelize';
+import Product from '../app/entities/Product.entity';
+import { HttpStatuses } from '../app/enums/http-statuses.enum';
+import HttpException from '../app/exceptions/http-exception';
+import { productCreate } from './product.schemas';
 
 export const getAllProducts = async () => {
+    const products = await Product.findAll();
 
-    const products = await Product.findAll()
-
-    return products
-}
+    return products;
+};
 
 export const getProductById = async (id: string) => {
+    const product = await Product.findOne({ where: { id } });
 
-    const product = await Product.findOne({where:{ id }})
+    return product;
+};
 
-    return product
-}
+export const getProductByIdOrName = async (id: string, name: string) => {
+    const product = await Product.findAll({
+        where: { [Op.or]: [{ id }, { name }] },
+    });
 
-export const getProductByIdOrName = async (id: string, name: string ) => {
-
-    const product = await Product.findAll({where:{ [Op.or]: [{id}, {name}]}})
-
-    return product
-}
+    return product;
+};
 
 export const createNewProduct = async (createDTO: productCreate) => {
-    const {id, name} = createDTO
+    const { id, name } = createDTO;
 
-const existingProduct = await getProductByIdOrName(id, name )
+    const existingProduct = await getProductByIdOrName(id, name);
 
-if(existingProduct.length) throw new HttpException(HttpStatuses.CONFLICT, `Product with id = '${id}' or name = '${name}' already exist`)
+    if (existingProduct.length)
+        throw new HttpException(
+            HttpStatuses.CONFLICT,
+            `Product with id = '${id}' or name = '${name}' already exist`
+        );
 
-    const newProduct = await Product.create(createDTO)
+    const newProduct = await Product.create(createDTO);
 
-return newProduct
-
-
-}
+    return newProduct;
+};

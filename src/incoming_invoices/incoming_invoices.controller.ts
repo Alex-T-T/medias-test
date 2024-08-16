@@ -1,24 +1,23 @@
-import { Request, Response } from "express";
-import IncomingInvoice from "../app/entities/IncomingInvoice.entity";
-import * as incomingInvoiceService from './incoming_invoices.service'
-import { HttpStatuses } from "../app/enums/http-statuses.enum";
-import { calculateCostPrices } from "../cost_price/cost_price.service";
-import { incomingInvoice } from "./incoming_invoices.schemas";
+import { Request, Response } from 'express';
+import IncomingInvoice from '../app/entities/IncomingInvoice.entity';
+import * as incomingInvoiceService from './incoming_invoices.service';
+import { HttpStatuses } from '../app/enums/http-statuses.enum';
+import { calculateCostPrices } from '../cost_price/cost_price.service';
+import { incomingInvoice } from './incoming_invoices.schemas';
 
 export const getAllInvoices = async (req: Request, res: Response) => {
-   
-    const products: InstanceType<typeof IncomingInvoice>[] = await incomingInvoiceService.getAllInvoices()
+    const products: InstanceType<typeof IncomingInvoice>[] =
+        await incomingInvoiceService.getAllInvoices();
 
-    res.status(HttpStatuses.OK).json(products)
-}
+    res.status(HttpStatuses.OK).json(products);
+};
 
 export const createNewInvoice = async (req: Request, res: Response) => {
+    const newInvoice = (await incomingInvoiceService.createNewInvoice(
+        req.body
+    )) as unknown as incomingInvoice;
 
-    const newInvoice = await incomingInvoiceService.createNewInvoice(req.body) as unknown as incomingInvoice
+    res.status(HttpStatuses.CREATED).json(newInvoice);
 
-    res.status(HttpStatuses.CREATED).json(newInvoice)
-
-    await calculateCostPrices(newInvoice)
-
-}
-
+    await calculateCostPrices(newInvoice);
+};

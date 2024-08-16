@@ -1,26 +1,28 @@
-
-import { DataTypes } from "sequelize";
-import { sequelize } from "../../db/db.config";
-import OutgoingInvoiceProduct from "./OutgoingInvoiceProduct.entity";
+import { DataTypes } from 'sequelize';
+import { sequelize } from '../../db/db.config';
+import OutgoingInvoiceProduct from './OutgoingInvoiceProduct.entity';
 
 const OutgoingInvoice = sequelize.define(
     'OutgoingInvoice',
     {
-      id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
-      date: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
+        date: {
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
     },
     {
-      tableName: 'OutgoingInvoices',
-    },
-  );
+        tableName: 'OutgoingInvoices',
+    }
+);
 
-  OutgoingInvoice.hasMany(OutgoingInvoiceProduct, { foreignKey: 'document_id', as: 'products' });
-  
-  export default OutgoingInvoice
+OutgoingInvoice.hasMany(OutgoingInvoiceProduct, {
+    foreignKey: 'document_id',
+    as: 'products',
+});
+
+export default OutgoingInvoice;

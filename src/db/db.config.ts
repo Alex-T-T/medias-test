@@ -1,6 +1,4 @@
-
-
-import { Options, Sequelize } from "sequelize";
+import { Options, Sequelize } from 'sequelize';
 
 const options: Options = {
     dialect: 'postgres',
@@ -9,6 +7,6 @@ const options: Options = {
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DB,
-}
+};
 
-export const sequelize = new Sequelize(options)
+export const sequelize = new Sequelize(options);
