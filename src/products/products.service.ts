@@ -30,7 +30,6 @@ export const createNewProduct = async (createDTO: productCreate) => {
     const {id, name} = createDTO
 
 const existingProduct = await getProductByIdOrName(id, name )
-console.log('existingProduct: ', existingProduct);
 
 if(existingProduct.length) throw new HttpException(HttpStatuses.CONFLICT, `Product with id = '${id}' or name = '${name}' already exist`)
 

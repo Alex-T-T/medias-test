@@ -13,8 +13,6 @@ interface ReportRow {
 }
 
 export const generateDailyProfitReport = async (startDate: Date, endDate: Date) => {
-    console.log('endDate: ', endDate);
-    console.log('startDate: ', startDate);
  
     const result = await sequelize.query(
         `
