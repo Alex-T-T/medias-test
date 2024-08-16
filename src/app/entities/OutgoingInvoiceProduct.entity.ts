@@ -22,11 +22,11 @@ const OutgoingInvoiceProduct = sequelize.define(
         allowNull: false,
       },
       price: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(11, 2),
         allowNull: false,
       },
       quantity: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       date: {

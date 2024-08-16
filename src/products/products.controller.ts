@@ -11,9 +11,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
 
 export const createNewProduct = async (req: Request, res: Response) => {
 
-
-    const newProduct: InstanceType<typeof Product> = await productsService.createNewProduct(req.body)
-
+    const newProduct = await productsService.createNewProduct(req.body)
 
     res.status(HttpStatuses.CREATED).json(newProduct)
 }

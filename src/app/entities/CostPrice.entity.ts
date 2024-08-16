@@ -17,7 +17,7 @@ const CostPrice = sequelize.define('CostPrice', {
 
     },
     value: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.FLOAT(11, 2),
       allowNull: false,
     },
   },

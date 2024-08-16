@@ -1,7 +1,5 @@
 import Joi from 'joi';
 
-
-
 export const productCreateSchema = Joi.object<productCreate>({
     id: Joi.string().required(),
     name: Joi.string().min(3).required()

@@ -27,7 +27,6 @@ export const getInvoiceById = async (id: string) => {
 
 export const createNewInvoice = async (createDTO: outgoingInvoiceCreate) => {
 
-
     const transaction = await sequelize.transaction();
     try {
 

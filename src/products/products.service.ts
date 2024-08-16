@@ -12,6 +12,13 @@ export const getAllProducts = async () => {
     return products
 }
 
+export const getProductById = async (id: string) => {
+
+    const product = await Product.findOne({where:{ id }})
+
+    return product
+}
+
 export const getProductByIdOrName = async (id: string, name: string ) => {
 
     const product = await Product.findAll({where:{ [Op.or]: [{id}, {name}]}})

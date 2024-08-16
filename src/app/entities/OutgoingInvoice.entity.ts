@@ -10,7 +10,6 @@ const OutgoingInvoice = sequelize.define(
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        allowNull: false,
       },
       date: {
         type: DataTypes.DATE,
